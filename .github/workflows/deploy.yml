@@ -36,7 +36,15 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci
+        # Use npm ci when a lockfile exists for reproducible installs, otherwise fall back to npm install
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            echo "Lockfile found — running npm ci"
+            npm ci
+          else
+            echo "No lockfile — running npm install"
+            npm install
+          fi
 
       - name: Build (Vite)
         run: npm run build
