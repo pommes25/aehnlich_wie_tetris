@@ -12,9 +12,12 @@ permissions:
   id-token: write
 
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,19 +41,8 @@ jobs:
       - name: Build (Vite)
         run: npm run build
 
-      - name: Upload artifact for GitHub Pages
-        # Use v2 which depends on newer upload-artifact and avoids the deprecated v3 warning
-        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to GitHub Pages (peaceiris)
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./dist
-
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
