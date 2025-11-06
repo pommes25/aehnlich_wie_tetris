@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 class MenuScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MenuScene' });
@@ -31,3 +33,5 @@ class MenuScene extends Phaser.Scene {
         });
     }
 }
+
+export default MenuScene;

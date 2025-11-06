@@ -49,4 +49,26 @@ const TETROMINOS = {
     }
 };
 
-export default TETROMINOS;
+class Pieces {
+    constructor() {
+        this.tetrominos = TETROMINOS;
+    }
+
+    getRandomPiece() {
+        const keys = Object.keys(this.tetrominos);
+        const k = keys[Math.floor(Math.random() * keys.length)];
+        const proto = this.tetrominos[k];
+        // Return a new piece instance with its own shape copy and initial position
+        return {
+            shape: proto.shape.map(row => row.slice()),
+            color: proto.color,
+            x: 3,
+            y: 0,
+            update() {
+                // placeholder for piece update logic
+            }
+        };
+    }
+}
+
+export default Pieces;

@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 class BootScene extends Phaser.Scene {
     constructor() {
         super({ key: 'BootScene' });
@@ -14,3 +16,5 @@ class BootScene extends Phaser.Scene {
         this.scene.start('MenuScene');
     }
 }
+
+export default BootScene;

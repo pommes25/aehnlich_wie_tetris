@@ -1,3 +1,7 @@
+import Phaser from 'phaser';
+import Board from '../game/board';
+import Pieces from '../game/pieces';
+
 // This file contains the main gameplay logic, rendering the game board and pieces, and handling game over conditions.
 
 class GameScene extends Phaser.Scene {
@@ -15,7 +19,8 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-        this.board = new Board(this);
+        // Initialize a typical Tetris board: 20 rows x 10 columns
+        this.board = new Board(20, 10);
         this.pieces = new Pieces();
         this.spawnPiece();
         this.input.keyboard.on('keydown', this.handleInput, this);
