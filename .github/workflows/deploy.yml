@@ -7,7 +7,7 @@ on:
 
 # Grant only the minimal permissions needed. pages & id-token are required for the deployment flow.
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -16,7 +16,7 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pages: write
     steps:
       - name: Checkout repository
