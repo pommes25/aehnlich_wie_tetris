@@ -50,21 +50,39 @@ This project is a Tetris game built using the Phaser library. It features classi
    cd tetris-phaser
    ```
 
-3. Install the dependencies:
-   ```
-   npm install
-   ```
+3. Install the dependencies (this will create a lockfile locally):
+  ```powershell
+  npm install
+  ```
+
+  Note: Running `npm install` locally will produce a `package-lock.json`. Commit that file to the repository to allow CI to use `npm ci` for reproducible installs.
 
 4. Run the development server:
-   ```
-   npm run dev
-   ```
+  ```powershell
+  npm start
+  ```
 
-5. Open your browser and go to `http://localhost:3000` to play the game.
+5. Open your browser and go to `http://localhost:5173` (Vite default) to play the game.
 
 ## Deployment
 
-This project is set up for deployment on GitHub Pages. Once you push your changes to the main branch, the GitHub Actions workflow will automatically deploy the project.
+This project is set up for deployment on GitHub Pages via a GitHub Actions workflow. When you push to the `main` branch the workflow will:
+
+- install dependencies
+- build the project with Vite (`npm run build`)
+- publish the `dist/` folder to GitHub Pages
+
+If your local CI build failed because `npm ci` could not run (missing `package-lock.json`), create and commit the lockfile locally as described above and push it — this will make CI use `npm ci` (fast and reproducible).
+
+Tip: You can also run a local build to verify the output before pushing:
+
+```powershell
+npm install
+npm run build
+dir .\dist
+```
+
+The workflow triggers on pushes to `main`. If your repository uses a different default branch, update `.github/workflows/deploy.yml` accordingly.
 
 ## Gameplay
 
